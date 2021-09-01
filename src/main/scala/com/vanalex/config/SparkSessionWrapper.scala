@@ -1,4 +1,4 @@
-package com.vanalex
+package com.vanalex.config
 
 import org.apache.spark.sql.SparkSession
 
