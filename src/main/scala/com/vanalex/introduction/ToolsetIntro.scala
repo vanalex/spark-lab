@@ -1,7 +1,7 @@
 package com.vanalex.introduction
 
 import com.vanalex.config.SparkSessionWrapper
-import com.vanalex.dataframe.{DataframeFactory, Operations}
+import com.vanalex.dataframe.{DataframeFactory, Encoder}
 import com.vanalex.model.Flight
 import org.apache.spark.sql.functions.{col, window}
 
@@ -10,7 +10,7 @@ object ToolsetIntro extends SparkSessionWrapper{
   def main(args: Array[String]): Unit = {
 
     val flightsDF = DataframeFactory.dataframeByParquetFile("src/main/resources/flight/2010-summary.parquet")
-    val flights = Operations.applyEncoder[Flight](flightsDF)
+    val flights = Encoder.applyEncoder[Flight](flightsDF)
 
     flights.show(truncate = false)
 
