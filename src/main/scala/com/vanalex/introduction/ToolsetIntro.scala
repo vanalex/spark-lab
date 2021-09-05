@@ -9,7 +9,7 @@ object ToolsetIntro extends SparkSessionWrapper{
   import spark.implicits._
   def main(args: Array[String]): Unit = {
 
-    val flightsDF = DataframeFactory.dataframeByParquetFile("src/main/resources/flight/2010-summary.parquet")
+    val flightsDF = DataframeFactory.dataframeByParquetFile(spark, "src/main/resources/flight/2010-summary.parquet")
     val flights = Encoder.applyEncoder[Flight](flightsDF)
 
     flights.show(truncate = false)
