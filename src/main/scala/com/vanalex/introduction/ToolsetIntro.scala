@@ -1,7 +1,7 @@
 package com.vanalex.introduction
 
 import com.vanalex.config.SparkSessionWrapper
-import com.vanalex.dataframe.{DataframeFactory, Operations}
+import com.vanalex.dataframe.{DataframeFactory, Encoder}
 import com.vanalex.model.Flight
 import org.apache.spark.sql.functions.{col, window}
 
