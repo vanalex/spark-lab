@@ -9,7 +9,7 @@ object ToolsetIntro extends SparkSessionWrapper{
   import spark.implicits._
   def main(args: Array[String]): Unit = {
 
-    val flightsDF = DataframeFactory.dataframeByParquetFile("src/main/resources/flight/2010-summary.parquet")
+    val flightsDF = DataframeFactory.dataframeByParquetFile(spark,"src/main/resources/flight/2010-summary.parquet")
     val flights = Operations.applyEncoder[Flight](flightsDF)
 
     flights.show(truncate = false)
@@ -58,5 +58,15 @@ object ToolsetIntro extends SparkSessionWrapper{
       .load("src/main/resources/retail-data/by-day/*.csv")
 
     println(streamingDataFrame.isStreaming)
+
+    val purchaseByCustomerPerHour = streamingDataFrame
+      .selectExpr(
+        "CustomerId",
+        "(UnitPrice * Quantity) as total_cost",
+        "InvoiceDate")
+      .groupBy(
+        $"CustomerId", window($"InvoiceDate", "1 day"))
+      .sum("total_cost")
+    purchaseByCustomerPerHour.show(truncate = false)
   }
 }
