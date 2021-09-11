@@ -4,11 +4,13 @@ version := "0.0.1"
 
 scalaVersion := "2.12.12"
 
-libraryDependencies += "org.apache.spark" %% "spark-sql" % "3.1.1" % "provided"
-
+libraryDependencies += "org.apache.spark" %% "spark-sql" % "3.1.1"
+libraryDependencies += "org.apache.spark" %% "spark-mllib" % "3.1.1"
+libraryDependencies += "org.apache.spark" %% "spark-core" % "3.1.1"
 libraryDependencies += "com.github.mrpowers" %% "spark-daria" % "0.38.2"
 libraryDependencies += "com.github.mrpowers" %% "spark-fast-tests" % "0.21.3" % "test"
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.1" % "test"
+libraryDependencies += "com.novocode" % "junit-interface" % "0.11" % "test"
 
 // test suite settings
 fork in Test := true
