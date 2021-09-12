@@ -11,4 +11,8 @@ object Rdd {
     sparkSession.sparkContext.parallelize(data)
   }
 
+  def create[T:ClassTag](sparkSession: SparkSession, path: String): RDD[String] = {
+    sparkSession.sparkContext.textFile(path)
+  }
+
 }
