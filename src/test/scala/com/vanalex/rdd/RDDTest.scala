@@ -1,7 +1,6 @@
-package com.vanalex
+package com.vanalex.rdd
 
 import com.vanalex.config.SparkSessionWrapper
-import com.vanalex.rdd.Rdd
 import org.junit.Assert.{assertEquals, assertNotNull}
 import org.scalatest.FunSpec
 
