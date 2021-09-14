@@ -3,7 +3,9 @@ name := "spark-lab"
 version := "0.0.1"
 
 scalaVersion := "2.12.12"
+val sparkVersion = "3.1.1"
 
+libraryDependencies += "org.apache.spark" %% "spark-avro" % sparkVersion
 libraryDependencies += "org.apache.spark" %% "spark-sql" % "3.1.1"
 libraryDependencies += "org.apache.spark" %% "spark-mllib" % "3.1.1"
 libraryDependencies += "org.apache.spark" %% "spark-core" % "3.1.1"
