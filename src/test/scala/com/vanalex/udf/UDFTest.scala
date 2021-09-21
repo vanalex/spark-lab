@@ -7,10 +7,11 @@ import org.scalatest.FunSpec
 
 class UDFTest extends FunSpec with SparkSessionWrapper{
 
+  spark.udf.register("cubed", cubed)
+
   describe("test UDF") {
 
     it("define and test UDF") {
-      spark.udf.register("cubed", cubed)
 
       // Create temporary view
       spark.range(1, 9).createOrReplaceTempView("udf_test")
@@ -19,6 +20,14 @@ class UDFTest extends FunSpec with SparkSessionWrapper{
 
       assertEquals(df.first().getLong(0), Long.box(1));
       assertEquals(df.first().getLong(1), Long.box(1));
+    }
+
+    it("Building a User Defined Function") {
+
+      val df = spark.createDataFrame(spark.sparkContext.parallelize(DataSourceBuilder.buildArrayData()), DataSourceBuilder.arraySchema())
+      df.createOrReplaceTempView("table")
+      df.printSchema()
+      df.show()
     }
   }
 }

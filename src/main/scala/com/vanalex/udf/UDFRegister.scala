@@ -1,7 +1,7 @@
 package com.vanalex.udf
 
-import javassist.bytecode.stackmap.TypeTag
 import org.apache.spark.sql.SparkSession
+import scala.reflect.runtime.universe.TypeTag
 
 class UDFRegister {
 
