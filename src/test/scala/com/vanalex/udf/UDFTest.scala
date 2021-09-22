@@ -29,5 +29,16 @@ class UDFTest extends FunSpec with SparkSessionWrapper{
       df.printSchema()
       df.show()
     }
+
+    it("sql explode") {
+      val df = spark.createDataFrame(spark.sparkContext.parallelize(DataSourceBuilder.buildArrayData()), DataSourceBuilder.arraySchema())
+      df.createOrReplaceTempView("table")
+      val newDF = spark.sql("""
+      SELECT id, collect_list(value + 1) AS newValues
+      FROM  (SELECT id, explode(values) AS value
+      FROM table) x
+      GROUP BY id
+      """)
+    }
   }
 }
