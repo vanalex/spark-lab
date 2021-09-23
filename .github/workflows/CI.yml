@@ -24,28 +24,3 @@ jobs:
     #- uses: actions/checkout@v2
     #- name: Formatting
     #  run: sbt scalafmtSbtCheck scalafmtCheck test:scalafmtCheck
-
----
-name: "release"
-on:
-  push:
-    branches:
-      - release/v*
-
-jobs:
-  pre-release:
-    name: "Pre Release"
-    runs-on: "ubuntu-latest"
-
-    steps:
-    - name: Check out code
-      uses: actions/checkout@v2
-    - uses: "marvinpinto/action-automatic-releases@latest"
-      with:
-        repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        automatic_release_tag: "latest"
-        prerelease: true
-        title: "Development Build"
-        files: |
-          LICENSE.txt
-          *.jar
