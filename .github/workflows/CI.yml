@@ -15,9 +15,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Setup Scala
-        uses: olafurpg/setup-scala@v10
+        uses: olafurpg/setup-scala@v11
+      - name: Compile
+        run: sbt compile
+      - name: Test
+        run: sbt -v -Dfile.encoding=UTF-8 coverage test
+      - name: Coverage Report
+        run: sbt coverageReport
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
         with:
-          java-version: "adopt@1.8"
-      - name: Build and Test
-        run: sbt -v -Dfile.encoding=UTF-8 +test
+          fail_ci_if_error: true
 
