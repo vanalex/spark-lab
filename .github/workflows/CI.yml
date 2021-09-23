@@ -21,6 +21,10 @@ jobs:
       uses: "codecov/codecov-action@v1"
       with:
         fail_ci_if_error: true
+    - uses: actions/upload-artifact@v2
+      with:
+        name: tests
+        path: target/test-reports/**
     #- uses: actions/checkout@v2
     #- name: Formatting
     #  run: sbt scalafmtSbtCheck scalafmtCheck test:scalafmtCheck
