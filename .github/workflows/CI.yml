@@ -2,10 +2,12 @@ name: CI
 on:
   pull_request:
     branches:
-      - [master, feature/**]
+      - master
+      - feature/**
   push:
     branches:
-      - [master, feature/**]
+      - master
+      - feature/**
 jobs:
   test:
     runs-on: ubuntu-latest
