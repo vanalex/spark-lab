@@ -4,7 +4,7 @@ import com.vanalex.SparkSessionTestWrapper
 import org.junit.Assert.assertNotNull
 import org.scalatest.FunSpec
 
-class ReadAvroFileTest extends FunSpec with SparkSessionTestWrapper{
+class ReadAvroFileTest extends FunSpec with SparkSessionTestWrapper {
 
   describe("loads avro dataframe") {
 

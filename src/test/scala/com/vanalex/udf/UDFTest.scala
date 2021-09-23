@@ -5,7 +5,7 @@ import com.vanalex.udf.operations.cubed
 import org.junit.Assert.assertEquals
 import org.scalatest.FunSpec
 
-class UDFTest extends FunSpec with SparkSessionWrapper{
+class UDFTest extends FunSpec with SparkSessionWrapper {
 
   spark.udf.register("cubed", cubed)
 
@@ -24,14 +24,20 @@ class UDFTest extends FunSpec with SparkSessionWrapper{
 
     it("Building a User Defined Function") {
 
-      val df = spark.createDataFrame(spark.sparkContext.parallelize(DataSourceBuilder.buildArrayData()), DataSourceBuilder.arraySchema())
+      val df = spark.createDataFrame(
+        spark.sparkContext.parallelize(DataSourceBuilder.buildArrayData()),
+        DataSourceBuilder.arraySchema()
+      )
       df.createOrReplaceTempView("table")
       df.printSchema()
       df.show()
     }
 
     it("sql explode") {
-      val df = spark.createDataFrame(spark.sparkContext.parallelize(DataSourceBuilder.buildArrayData()), DataSourceBuilder.arraySchema())
+      val df = spark.createDataFrame(
+        spark.sparkContext.parallelize(DataSourceBuilder.buildArrayData()),
+        DataSourceBuilder.arraySchema()
+      )
       df.createOrReplaceTempView("table")
       val newDF = spark.sql("""
       SELECT id, collect_list(value + 1) AS newValues

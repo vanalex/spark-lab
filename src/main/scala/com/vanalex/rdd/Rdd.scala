@@ -7,12 +7,13 @@ import scala.reflect.ClassTag
 
 object Rdd {
 
-  def create[T: ClassTag](sparkSession: SparkSession, data: Seq[T]): RDD[T] ={
+  def create[T: ClassTag](sparkSession: SparkSession, data: Seq[T]): RDD[T] =
     sparkSession.sparkContext.parallelize(data)
-  }
 
-  def create[T:ClassTag](sparkSession: SparkSession, path: String): RDD[String] = {
+  def create[T: ClassTag](
+    sparkSession: SparkSession,
+    path: String
+  ): RDD[String] =
     sparkSession.sparkContext.textFile(path)
-  }
 
 }
