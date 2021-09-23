@@ -3,7 +3,7 @@ package com.vanalex
 import org.scalatest.FunSpec
 import org.apache.spark.sql.functions._
 import com.github.mrpowers.spark.fast.tests.DataFrameComparer
-import org.apache.spark.sql.types.{StructField, StructType, StringType}
+import org.apache.spark.sql.types.{StringType, StructField, StructType}
 import org.apache.spark.sql.Row
 
 class TransformsSpec
@@ -18,9 +18,9 @@ class TransformsSpec
     it("appends a happy column to a DataFrame") {
 
       val sourceDF = Seq(
-        ("jose"),
-        ("li"),
-        ("luisa")
+        "jose",
+        "li",
+        "luisa"
       ).toDF("name")
 
       val actualDF = sourceDF.transform(transforms.happyData())

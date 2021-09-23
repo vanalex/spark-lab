@@ -7,9 +7,11 @@ import org.scalatest.FunSpec
 class RDDTest extends FunSpec with SparkSessionWrapper {
 
   spark.sparkContext.setLogLevel("WARN")
+
   describe("RDD Basics") {
     it("Sequence to RDD") {
-      val data = Seq(("java", 200000), ("python", 5000), ("scala", 10000), ("R", 3000))
+      val data =
+        Seq(("java", 200000), ("python", 5000), ("scala", 10000), ("R", 3000))
       val rdd = Rdd.create(spark, data)
       assertNotNull(rdd)
       val firstRow = rdd.first()

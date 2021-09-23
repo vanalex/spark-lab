@@ -3,7 +3,7 @@ package com.vanalex
 import org.scalatest.FunSpec
 import org.apache.spark.sql.functions._
 import com.github.mrpowers.spark.fast.tests.ColumnComparer
-import org.apache.spark.sql.types.{StructField, StructType, StringType}
+import org.apache.spark.sql.types.{StringType, StructField, StructType}
 import org.apache.spark.sql.Row
 
 class FunctionsSpec
@@ -34,4 +34,3 @@ class FunctionsSpec
   }
 
 }
-

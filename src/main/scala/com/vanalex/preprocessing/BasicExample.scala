@@ -3,7 +3,7 @@ package com.vanalex.preprocessing
 import com.vanalex.config.SparkSessionWrapper
 import org.apache.spark.sql.functions.{column, translate}
 
-object BasicExample extends SparkSessionWrapper{
+object BasicExample extends SparkSessionWrapper {
 
   def main(args: Array[String]): Unit = {
     val rawDF = spark.read
@@ -39,12 +39,16 @@ object BasicExample extends SparkSessionWrapper{
       "review_scores_communication",
       "review_scores_location",
       "review_scores_value",
-      "price")
+      "price"
+    )
 
     baseDF.cache().count
     //baseDF.show(truncate = false)
 
-    val fixedPriceDF = baseDF.withColumn("price", translate(column("price"), "$,", "").cast("double"))
+    val fixedPriceDF = baseDF.withColumn(
+      "price",
+      translate(column("price"), "$,", "").cast("double")
+    )
     fixedPriceDF.show(truncate = false)
   }
 }

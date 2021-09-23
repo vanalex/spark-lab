@@ -5,11 +5,15 @@ import com.vanalex.dataframe.{DataframeFactory, Encoder}
 import com.vanalex.model.Flight
 import org.apache.spark.sql.functions.{col, window}
 
-object ToolsetIntro extends SparkSessionWrapper{
+object ToolsetIntro extends SparkSessionWrapper {
   import spark.implicits._
+
   def main(args: Array[String]): Unit = {
 
-    val flightsDF = DataframeFactory.dataframeByParquetFile(spark,"src/main/resources/flight/2010-summary.parquet")
+    val flightsDF = DataframeFactory.dataframeByParquetFile(
+      spark,
+      "src/main/resources/flight/2010-summary.parquet"
+    )
     val flights = Encoder.applyEncoder[Flight](flightsDF)
 
     flights.show(truncate = false)
@@ -23,11 +27,14 @@ object ToolsetIntro extends SparkSessionWrapper{
     flights
       .take(5)
       .filter(flight_row => flight_row.ORIGIN_COUNTRY_NAME != "Canada")
-      .map(fr => Flight(fr.DEST_COUNTRY_NAME, fr.ORIGIN_COUNTRY_NAME, fr.count + 5))
+      .map(fr =>
+        Flight(fr.DEST_COUNTRY_NAME, fr.ORIGIN_COUNTRY_NAME, fr.count + 5)
+      )
 
     flights.show(truncate = false)
 
-    val staticDataFrame = spark.read.format("csv")
+    val staticDataFrame = spark.read
+      .format("csv")
       .option("header", "true")
       .option("inferSchema", "true")
       .load("src/main/resources/retail-data/by-day/*.csv")
@@ -42,9 +49,9 @@ object ToolsetIntro extends SparkSessionWrapper{
       .selectExpr(
         "CustomerId",
         "(UnitPrice * Quantity) as total_cost",
-        "InvoiceDate")
-      .groupBy(
-        col("CustomerId"), window(col("InvoiceDate"), "1 day"))
+        "InvoiceDate"
+      )
+      .groupBy(col("CustomerId"), window(col("InvoiceDate"), "1 day"))
       .sum("total_cost")
       .show(5)
 
@@ -63,9 +70,9 @@ object ToolsetIntro extends SparkSessionWrapper{
       .selectExpr(
         "CustomerId",
         "(UnitPrice * Quantity) as total_cost",
-        "InvoiceDate")
-      .groupBy(
-        $"CustomerId", window($"InvoiceDate", "1 day"))
+        "InvoiceDate"
+      )
+      .groupBy($"CustomerId", window($"InvoiceDate", "1 day"))
       .sum("total_cost")
     purchaseByCustomerPerHour.show(truncate = false)
   }

@@ -5,7 +5,7 @@ import org.apache.spark.sql.types.StructType
 
 object DataSourceBuilder {
 
-  def arraySchema(): StructType ={
+  def arraySchema(): StructType = {
     // Create schema
     import org.apache.spark.sql.types._
     new StructType()
@@ -13,11 +13,10 @@ object DataSourceBuilder {
       .add("values", ArrayType(IntegerType))
   }
 
-  def buildArrayData(): Seq[Row] ={
+  def buildArrayData(): Seq[Row] =
     Seq(
       Row(1, List(1, 2, 3)),
       Row(2, List(2, 3, 4)),
       Row(3, List(3, 4, 5))
     )
-  }
 }
