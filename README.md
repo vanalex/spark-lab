@@ -1,6 +1,6 @@
 # spark-lab
 
-*add project short description*
+Project to experiment with spark.
 
 ## Accessing the library
 
